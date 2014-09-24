@@ -10,11 +10,6 @@ class ReviewsController < ApplicationController
     @show = Show.find(@review.show_id)
   end
 
-  # def show
-  #   @review = Review.find(params[:id])
-  #   redirect_to show_path(params[:show_id])
-  # end
-
   def update
     @review = Review.find(params[:id])
 
@@ -22,7 +17,7 @@ class ReviewsController < ApplicationController
       flash[:notice]= "Review updated successfully"
       redirect_to show_path(params[:show_id])
     else
-      binding.pry
+
       flash[:notice]= "You didn't enter enough information."
       render 'edit'
     end
@@ -43,6 +38,14 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def show
+    @review_id = params[:id]
+    @review = Review.destroy(@review_id)
+    if @review.save
+      flash[:notice] = "Review deleted successfully"
+      redirect_to show_path(params[:show_id])
+    end
+  end
 
   private
 
