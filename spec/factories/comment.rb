@@ -4,11 +4,9 @@ FactoryGirl.define do
       "#{n}"
     end
 
-    sequence :review_id do |n|
-      "#{n}"
-    end
-
     text "This is my first comment"
 
+    association :review
+    association :user
   end
 end
